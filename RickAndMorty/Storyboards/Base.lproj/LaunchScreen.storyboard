@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,10 +13,42 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spots" translatesAutoresizingMaskIntoConstraints="NO" id="fTm-1W-jL7">
+                                <rect key="frame" x="16" y="98" width="334" height="650"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="334" id="Ad1-KG-pyc"/>
+                                    <constraint firstAttribute="height" constant="650" id="wS1-QF-ap3"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caption" translatesAutoresizingMaskIntoConstraints="NO" id="eGd-tI-i37">
+                                <rect key="frame" x="118" y="164" width="140" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1cX-5t-rXe"/>
+                                    <constraint firstAttribute="width" constant="140" id="onF-gN-b9E"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vortex" translatesAutoresizingMaskIntoConstraints="NO" id="R59-EQ-gCB">
+                                <rect key="frame" x="118" y="240" width="140" height="228"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="228" id="Aaf-ed-BTg"/>
+                                    <constraint firstAttribute="width" constant="140" id="xLy-gD-GtY"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eGd-tI-i37" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="164" id="CU3-0h-NX5"/>
+                            <constraint firstItem="R59-EQ-gCB" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="240" id="EfM-ke-MMT"/>
+                            <constraint firstItem="R59-EQ-gCB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="Ovy-bl-UoZ"/>
+                            <constraint firstItem="eGd-tI-i37" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="cmA-LK-NVn"/>
+                            <constraint firstItem="fTm-1W-jL7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="g9o-36-EWN"/>
+                            <constraint firstItem="fTm-1W-jL7" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="98" id="w7X-GM-DCT"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +56,12 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="caption" width="140" height="40"/>
+        <image name="spots" width="334" height="650"/>
+        <image name="vortex" width="140" height="228"/>
+        <namedColor name="backgroundColor">
+            <color red="0.015686274509803921" green="0.047058823529411764" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
