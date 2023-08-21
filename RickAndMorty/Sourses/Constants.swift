@@ -62,6 +62,9 @@ enum Constants {
         static let infoCardHeight = 124.0
         static let originCardHeight = 80.0
         static let episodeCardHeight = 86.0
+        
+        static let planetImageSize = 64.0
+        static let planetImageBorderGap = 8.0
     }
     
     enum CornerRadius {
@@ -72,5 +75,10 @@ enum Constants {
         // Profile Screen
         static let profileImage = 16.0
         static let profileAnyCard = 16.0
+        static let planetImage = 10.0
+    }
+    
+    enum ProfileLabel {
+        
     }
 }

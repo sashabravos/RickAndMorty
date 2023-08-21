@@ -44,8 +44,7 @@ final class CharactersViewController: UIViewController {
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.spacing = Constants.Constraints.charactersVerticalGap
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(collectionView)
+        stackView.addSomeSubviews([titleLabel, collectionView])
         return stackView
     }()
     
@@ -87,7 +86,8 @@ final class CharactersViewController: UIViewController {
 
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            print("You selected cell #\(indexPath.item)!")
+            let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
         }
 }
 
