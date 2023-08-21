@@ -14,7 +14,9 @@
 		03F9C0AE2A928B93001C28BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03F9C0AC2A928B93001C28BD /* LaunchScreen.storyboard */; };
 		03F9C0BC2A92A8B0001C28BD /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */; };
 		03F9C0BF2A92C389001C28BD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9C0BE2A92C389001C28BD /* Constants.swift */; };
-		03F9C0C12A9362CA001C28BD /* Gilroy-Font in Resources */ = {isa = PBXBuildFile; fileRef = 03F9C0C02A9362CA001C28BD /* Gilroy-Font */; };
+		03F9C0CE2A938C31001C28BD /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03F9C0CD2A938C26001C28BD /* Gilroy-Bold.ttf */; };
+		03F9C0CF2A938C34001C28BD /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03F9C0CC2A938C26001C28BD /* Gilroy-Medium.ttf */; };
+		03F9C0D02A938C36001C28BD /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03F9C0CB2A938C26001C28BD /* Gilroy-SemiBold.ttf */; };
 		F7B132F5E648FF216D403C6A /* Pods_RickAndMorty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30284B4E5C0BEA47C01F2793 /* Pods_RickAndMorty.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +30,9 @@
 		03F9C0AF2A928B93001C28BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
 		03F9C0BE2A92C389001C28BD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		03F9C0C02A9362CA001C28BD /* Gilroy-Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Gilroy-Font"; sourceTree = "<group>"; };
+		03F9C0CB2A938C26001C28BD /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
+		03F9C0CC2A938C26001C28BD /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
+		03F9C0CD2A938C26001C28BD /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Bold.ttf"; sourceTree = "<group>"; };
 		2BC96CDD11711ABAFEBBEE2B /* Pods-RickAndMorty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMorty.debug.xcconfig"; path = "Target Support Files/Pods-RickAndMorty/Pods-RickAndMorty.debug.xcconfig"; sourceTree = "<group>"; };
 		30284B4E5C0BEA47C01F2793 /* Pods_RickAndMorty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RickAndMorty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9938460BED29EB95B0117BC6 /* Pods-RickAndMorty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMorty.release.xcconfig"; path = "Target Support Files/Pods-RickAndMorty/Pods-RickAndMorty.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,8 +100,8 @@
 		03F9C0B72A928D4D001C28BD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */,
-				03F9C0A52A928B92001C28BD /* CharactersViewController.swift */,
+				03F9C0D12A939746001C28BD /* MainScreen */,
+				03F9C0D22A939754001C28BD /* Detail Screen */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -107,9 +111,27 @@
 			children = (
 				03F9C0AA2A928B93001C28BD /* Assets.xcassets */,
 				03F9C0BE2A92C389001C28BD /* Constants.swift */,
-				03F9C0C02A9362CA001C28BD /* Gilroy-Font */,
+				03F9C0CD2A938C26001C28BD /* Gilroy-Bold.ttf */,
+				03F9C0CC2A938C26001C28BD /* Gilroy-Medium.ttf */,
+				03F9C0CB2A938C26001C28BD /* Gilroy-SemiBold.ttf */,
 			);
 			path = Sourses;
+			sourceTree = "<group>";
+		};
+		03F9C0D12A939746001C28BD /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */,
+				03F9C0A52A928B92001C28BD /* CharactersViewController.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		03F9C0D22A939754001C28BD /* Detail Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Detail Screen";
 			sourceTree = "<group>";
 		};
 		6C3E46B6B841E509176341F4 /* Frameworks */ = {
@@ -189,8 +211,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F9C0CE2A938C31001C28BD /* Gilroy-Bold.ttf in Resources */,
+				03F9C0CF2A938C34001C28BD /* Gilroy-Medium.ttf in Resources */,
 				03F9C0AE2A928B93001C28BD /* LaunchScreen.storyboard in Resources */,
-				03F9C0C12A9362CA001C28BD /* Gilroy-Font in Resources */,
+				03F9C0D02A938C36001C28BD /* Gilroy-SemiBold.ttf in Resources */,
 				03F9C0AB2A928B93001C28BD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

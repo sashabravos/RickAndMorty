@@ -20,7 +20,7 @@ enum Constants {
     
     enum Font {
         // Characters
-        static let charactersTitle = UIFont(name: "Gilroy-Bold", size: 28.0)
+        static let charactersTitle =  UIFont(name: "Gilroy-Bold", size: 28.0)
         static let characterCardName = UIFont(name: "Gilroy-SemiBold", size: 17.0)
         
         // Profile
@@ -39,7 +39,10 @@ enum Constants {
         static let cardHeight = 202.0
         static let cardWidth = 156.0
         static let charactersHorizontalGap = 16.0
+        static let charactersHalfHorizontalGap = 8.0
         static let charactersVerticalGap = 32.0
+        static let charactersSideGap = 20.0
+        static let charactersTitleHeight = 41.0
         
         // Characters Cell
         static let cardImageSquareSize = 140.0

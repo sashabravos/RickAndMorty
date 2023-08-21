@@ -20,7 +20,6 @@ final class CharacterCard: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-//        label.backgroundColor = .clear
         label.font = Constants.Font.characterCardName
         label.textColor = Constants.Color.white
         label.textAlignment = .center
@@ -40,9 +39,9 @@ final class CharacterCard: UICollectionViewCell {
     
     private func setupViews() {
         
-        self.layer.cornerRadius = 16
+        self.layer.cornerRadius = Constants.CornerRadius.cellCard
         self.layer.masksToBounds = true
-        self.backgroundColor = #colorLiteral(red: 0.1976234317, green: 0.219899714, blue: 0.2836517096, alpha: 1)
+        self.backgroundColor = Constants.Color.blackCard
         
         [imageView, titleLabel].forEach {
             contentView.addSubview($0)
@@ -50,14 +49,17 @@ final class CharacterCard: UICollectionViewCell {
         }
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
-            imageView.heightAnchor.constraint(equalToConstant: 140.0),
-            imageView.widthAnchor.constraint(equalToConstant: 140.0),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                           constant: Constants.Constraints.cardImageBorderGap),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
+                                               constant: Constants.Constraints.cardImageBorderGap),
+            imageView.heightAnchor.constraint(equalToConstant: Constants.Constraints.cardImageSquareSize),
+            imageView.widthAnchor.constraint(equalToConstant: Constants.Constraints.cardImageSquareSize),
             
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 164.0),
-            titleLabel.heightAnchor.constraint(equalToConstant: 22)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                            constant: Constants.Constraints.cardTitleTop),
+            titleLabel.heightAnchor.constraint(equalToConstant: Constants.Constraints.cardTitleHeight)
         ])
     }
     
