@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CharacterCard: UICollectionViewCell {
     
@@ -14,6 +15,7 @@ final class CharacterCard: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = Constants.CornerRadius.cardImage
         return imageView
     }()
@@ -39,10 +41,6 @@ final class CharacterCard: UICollectionViewCell {
     
     private func setupViews() {
         
-        self.layer.cornerRadius = Constants.CornerRadius.cellCard
-        self.layer.masksToBounds = true
-        self.backgroundColor = Constants.Color.blackCard
-        
         [imageView, titleLabel].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,8 +61,21 @@ final class CharacterCard: UICollectionViewCell {
         ])
     }
     
-    func configure(with image: UIImage, title: String) {
-        imageView.image = image
-        titleLabel.text = title
+    public func configure(with model: Character) {
+        self.layer.cornerRadius = Constants.CornerRadius.cellCard
+        self.layer.masksToBounds = true
+        self.backgroundColor = Constants.Color.blackCard
+        
+        titleLabel.text = model.name
+        let imageURL = URL(string: model.image ?? String())
+        
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: imageURL,
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ]
+        )
     }
 }

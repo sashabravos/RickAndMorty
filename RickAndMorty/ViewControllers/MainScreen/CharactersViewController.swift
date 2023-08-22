@@ -9,6 +9,10 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
     
+    private lazy var characters: [Character] = []
+    private lazy var currentPage = 1
+    private lazy var isLoadingData = false
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Characters"
@@ -53,7 +57,39 @@ final class CharactersViewController: UIViewController {
         
         superviewSettings()
         setupSubviews()
+        Task {
+            await loadData()
+        }
+    }
+    
+    private func loadData() async {
+        guard !isLoadingData else { return }
         
+        isLoadingData = true
+        
+        do {
+            let characterModel = try await RequestManager.shared.getCharacters(with: currentPage)
+            appendCharacters(characterModel.results, characterModel.info)
+            
+        } catch {
+            handleError(error)
+        }
+    }
+    
+    func appendCharacters(_ charactersInfo: [Character],
+                          _ pageInfo: Info) {
+        characters.append(contentsOf: charactersInfo)
+        collectionView.reloadData()
+        
+        if pageInfo.next != nil {
+            currentPage += 1
+            isLoadingData = false
+        }
+    }
+    
+    func handleError(_ error: Error) {
+        print("Ошибка декодирования данных: \(error)")
+        isLoadingData = false
     }
     
     private func superviewSettings() {
@@ -61,12 +97,13 @@ final class CharactersViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
     }
-
+    
     private func setupSubviews() {
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.topAnchor,
                                            constant: Constants.Constraints.charactersVerticalGap),
@@ -86,27 +123,36 @@ final class CharactersViewController: UIViewController {
 
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let profileVC = ProfileViewController()
+        let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
-        }
+    }
 }
 
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return characters.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCard.identifier,
                                                          for: indexPath) as? CharacterCard {
-            let image = UIImage(named: "rick")
-            let title = "Rick Sanchez"
-            
-            cell.configure(with: image ?? UIImage(), title: title)
+            let person = characters[indexPath.row]
+            cell.configure(with: person)
             
             return cell
         }
         return UICollectionViewCell()
+    }
+}
+
+extension CharactersViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if let lastIndexPath = indexPaths.last,
+            lastIndexPath.row >= characters.count - 1 {
+            Task {
+                await loadData()
+            }
+        }
     }
 }

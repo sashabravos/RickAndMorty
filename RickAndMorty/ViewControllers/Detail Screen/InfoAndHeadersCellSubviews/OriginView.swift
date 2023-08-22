@@ -16,7 +16,7 @@ class OriginView: UIView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = Constants.CornerRadius.planetImage
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "rick")
         return imageView
     }()
