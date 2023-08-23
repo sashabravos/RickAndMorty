@@ -25,10 +25,17 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationBar()
         setupTableView()
         prepareProfileInfo(with: selectedCharacter)
     }
     
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = Constants.Color.white
+        navigationController?.navigationBar.barTintColor = Constants.Color.blackBG
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.hidesBarsOnSwipe = true
+    }
     private func prepareProfileInfo(with profileInfo: Character) {
         if let planetURL = profileInfo.origin?.url {
             originURL = planetURL
@@ -45,6 +52,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.dataSource = self
+        tableView.backgroundColor = Constants.Color.blackBG
         
         tableView.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         tableView.register(InfoAndHeadersCell.self, forCellReuseIdentifier: InfoAndHeadersCell.identifier)
@@ -74,56 +82,77 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.section {
         case 0:
             let profileCell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier,
                                                             for: indexPath) as! ProfileCell
-            if let character = selectedCharacter {
-                profileCell.configure(with: character)
-            }
+            profileCell.configure(with: selectedCharacter)
             return profileCell
         case 1:
             let infoCell = tableView.dequeueReusableCell(withIdentifier: InfoAndHeadersCell.identifier,
                                                          for: indexPath) as! InfoAndHeadersCell
-            if let locationNumber = originURL.split(separator: "/").last,
-               let locationID = Int(locationNumber) {
-                Task {
-                    do {
-                let locationInfo: Location
-                        = try await RequestManager.shared.getInfo(dataType: .location, id: locationID)
-                        infoCell.configure(with: locationInfo, by: selectedCharacter)
-                    } catch {
-                        print("Ошибка декодирования данных: \(error)")
-                    }
+            loadLocationInfo { locationInfo in
+                if let locationInfo = locationInfo {
+                    infoCell.configure(with: locationInfo, by: self.selectedCharacter)
                 }
             }
             return infoCell
         case 2:
             let episodeCell = tableView.dequeueReusableCell(withIdentifier: EpisodeCell.identifier,
                                                             for: indexPath) as! EpisodeCell
-            let episodeURLString = episodes[indexPath.row]
             
-            if let episodeNumber = episodeURLString.split(separator: "/").last,
-               let episodeID = Int(episodeNumber) {
-                Task {
-                    do {
-                        let episodeInfo: Episode =
-                        try await RequestManager.shared.getInfo(dataType: .episode, id: episodeID)
-                        episodeCell.configure(with: episodeInfo)
-                    } catch {
-                        print("Ошибка декодирования данных: \(error)")
-                    }
+            loadEpisodeInfo(indexPath: indexPath) { episodeInfo in
+                if let episodeInfo = episodeInfo {
+                    episodeCell.configure(with: episodeInfo)
                 }
             }
             return episodeCell
         default:
-            break
+            return UITableViewCell()
         }
-        return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
+    }
+}
+
+extension ProfileViewController {
+    private func loadLocationInfo(completion: @escaping (Location?) -> Void) {
+        if let locationNumber = selectedCharacter.origin?.url?.split(separator: "/").last,
+           let locationID = Int(locationNumber) {
+            Task {
+                do {
+                    let locationInfo: Location =
+                        try await RequestManager.shared.getInfo(dataType: .location, id: locationID)
+                    completion(locationInfo)
+                } catch {
+                    print("Ошибка декодирования данных: \(error)")
+                    completion(nil)
+                }
+            }
+        } else {
+            completion(nil)
+        }
+    }
+    
+    private func loadEpisodeInfo(indexPath: IndexPath, completion: @escaping (Episode?) -> Void) {
+        let episodeURLString = episodes[indexPath.row]
+        
+        if let episodeNumber = episodeURLString.split(separator: "/").last,
+           let episodeID = Int(episodeNumber) {
+            Task {
+                do {
+                    let episodeInfo: Episode =
+                        try await RequestManager.shared.getInfo(dataType: .episode, id: episodeID)
+                    completion(episodeInfo)
+                } catch {
+                    print("Ошибка декодирования данных: \(error)")
+                    completion(nil)
+                }
+            }
+        } else {
+            completion(nil)
+        }
     }
 }
