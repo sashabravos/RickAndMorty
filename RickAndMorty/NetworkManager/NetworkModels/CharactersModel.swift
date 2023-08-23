@@ -36,4 +36,5 @@ struct Character: Codable {
 struct Location: Codable {
     let name: String?
     let url: String?
+    let type: String?
 }

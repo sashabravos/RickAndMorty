@@ -10,9 +10,9 @@ import UIKit
 class OriginView: UIView {
     
     // MARK: - Planet Features
-    lazy var planetName = WhiteSemiBoldLabel(name: "Earth")
-    lazy var bottomTitle = SmallGreenLabel(name: "Planet")
-    lazy var planetImageView: UIImageView = {
+    lazy var planetName = WhiteSemiBoldLabel(name: "Unknown")
+    lazy var planetType = SmallGreenLabel(name: "Unknown")
+    private lazy var planetImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = Constants.CornerRadius.planetImage
         imageView.contentMode = .scaleAspectFill
@@ -34,11 +34,10 @@ class OriginView: UIView {
         self.layer.cornerRadius = Constants.CornerRadius.profileAnyCard
         self.backgroundColor = Constants.Color.blackCard
         self.translatesAutoresizingMaskIntoConstraints = false
-        [planetImageView, planetName, bottomTitle].forEach {
+        [planetImageView, planetName, planetType].forEach {
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-//        self.addSomeSubviews([planetImageView, planetName, bottomTitle])
         
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: Constants.Constraints.originCardHeight),
@@ -49,15 +48,15 @@ class OriginView: UIView {
                                                      constant: Constants.Constraints.planetImageBorderGap),
             planetImageView.topAnchor.constraint(equalTo: self.topAnchor,
                                                  constant: Constants.Constraints.planetImageBorderGap),
-
+            
             planetName.topAnchor.constraint(equalTo: self.topAnchor,
                                             constant: Constants.Constraints.profileVerticalGap),
             planetName.leadingAnchor.constraint(equalTo: planetImageView.trailingAnchor,
                                                 constant: Constants.Constraints.profileSideGap),
-
-            bottomTitle.topAnchor.constraint(equalTo: planetName.bottomAnchor,
-                                             constant: Constants.Constraints.profileVerticalGap),
-            bottomTitle.leadingAnchor.constraint(equalTo: planetName.leadingAnchor)
+            
+            planetType.topAnchor.constraint(equalTo: planetName.bottomAnchor,
+                                            constant: Constants.Constraints.profileVerticalGap),
+            planetType.leadingAnchor.constraint(equalTo: planetName.leadingAnchor)
         ])
     }
 }

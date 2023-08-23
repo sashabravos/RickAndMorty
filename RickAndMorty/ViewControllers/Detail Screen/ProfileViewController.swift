@@ -8,7 +8,12 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-        
+    
+    private var profileModel: ProfileModel!
+    private var chosenCharacter: Character!
+    private lazy var episodes: [String] = []
+    private lazy var originURL = ""
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -20,14 +25,43 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
+        Task {
+            await loadData()
+        }
+    }
+    
+    private func loadData() async {
+        do {
+            let characterInfo: Character = try await RequestManager.shared.getInfo(dataType: .character, id: 1)
+            
+            let profileModel = ProfileModel(character: characterInfo)
+            prepareProfileInfo(with: profileModel)
+            
+        } catch {
+            print("Ошибка декодирования данных: \(error)")
+        }
+    }
+    
+    private func prepareProfileInfo(with profileModel: ProfileModel) {
+        
+        chosenCharacter = profileModel.character
+        
+        if let planetURL = profileModel.character.origin?.url {
+            originURL = planetURL
+        }
+        
+        if let episodesList = profileModel.character.episode {
+            episodes = episodesList
+        }
+        
+        self.profileModel = profileModel
+        tableView.reloadData()
     }
     
     private func setupTableView() {
         view.addSubview(tableView)
         
-        tableView.delegate = self
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
         
         tableView.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         tableView.register(InfoAndHeadersCell.self, forCellReuseIdentifier: InfoAndHeadersCell.identifier)
@@ -43,10 +77,6 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate {
-    
-}
-
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -55,43 +85,62 @@ extension ProfileViewController: UITableViewDataSource {
         if section == 0 || section == 1 {
             sectionCount = 1
         } else if section == 2 {
-            sectionCount = 10
+            sectionCount = episodes.count
         }
         return sectionCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             let profileCell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier,
                                                             for: indexPath) as! ProfileCell
+            if let character = profileModel?.character {
+                profileCell.configure(with: character)
+            }
             return profileCell
-        } else if indexPath.section == 1 {
+        case 1:
             let infoCell = tableView.dequeueReusableCell(withIdentifier: InfoAndHeadersCell.identifier,
                                                          for: indexPath) as! InfoAndHeadersCell
+            if let locationNumber = originURL.split(separator: "/").last,
+               let locationID = Int(locationNumber) {
+                Task {
+                    do {
+                let locationInfo: Location
+                        = try await RequestManager.shared.getInfo(dataType: .location, id: locationID)
+                        infoCell.configure(with: locationInfo, by: chosenCharacter)
+                    } catch {
+                        print("Ошибка декодирования данных: \(error)")
+                    }
+                }
+            }
             return infoCell
-            
-        } else if indexPath.section == 2 {
+        case 2:
             let episodeCell = tableView.dequeueReusableCell(withIdentifier: EpisodeCell.identifier,
                                                             for: indexPath) as! EpisodeCell
+            let episodeURLString = episodes[indexPath.row]
+            
+            if let episodeNumber = episodeURLString.split(separator: "/").last,
+               let episodeID = Int(episodeNumber) {
+                Task {
+                    do {
+                        let episodeInfo: Episode =
+                        try await RequestManager.shared.getInfo(dataType: .episode, id: episodeID)
+                        episodeCell.configure(with: episodeInfo)
+                    } catch {
+                        print("Ошибка декодирования данных: \(error)")
+                    }
+                }
+            }
             return episodeCell
+        default:
+            break
         }
         return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
-    }
-
-}
-
-extension ProfileViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        if let lastIndexPath = indexPaths.last,
-//           lastIndexPath.row == posts.count - 1 {
-//            Task {
-//                await loadData()
-//            }
-//        }
     }
 }

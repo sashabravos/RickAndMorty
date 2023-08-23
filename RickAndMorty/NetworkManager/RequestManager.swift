@@ -13,10 +13,26 @@ final class RequestManager {
     
     private let baseUrl = "https://rickandmortyapi.com/api"
     
-    public func getCharacters(with page: Int) async throws -> CharactersModel {
-        let url = URL(string: "\(baseUrl)/character/?page=\(page)")!
+    enum DataType: String {
+        case character, location, episode
+    }
+    
+    public func getInfo<T: Decodable>(dataType: DataType,
+                                      id: Int? = nil,
+                                      page: Int? = nil) async throws -> T {
+        var urlString = "\(baseUrl)/\(dataType.rawValue)"
+        
+        if let id = id {
+            urlString += "/\(id)"
+        }
+        
+        if let page = page {
+            urlString += "?page=\(page)"
+        }
+        
+        let url = URL(string: urlString)!
         let (data, _) = try await URLSession.shared.data(from: url)
-        return try decodeData(CharactersModel.self, from: data)
+        return try decodeData(T.self, from: data)
     }
     
     private func decodeData<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {

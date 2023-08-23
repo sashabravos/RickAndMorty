@@ -10,14 +10,14 @@ import UIKit
 class InfoStackView: UIStackView {
 
     // MARK: - Left labels
-    lazy var speciesLeft = makeLeftLabel(with: "Species")
-    lazy var typeLeft = makeLeftLabel(with: "Type")
-    lazy var genderLeft = makeLeftLabel(with: "Gender")
+    private lazy var speciesLeft = makeLeftLabel(with: "Species")
+    private lazy var typeLeft = makeLeftLabel(with: "Type")
+    private lazy var genderLeft = makeLeftLabel(with: "Gender")
     
     // MARK: - Right labels
-    lazy var speciesRight = makeRightLabel(with: "Human")
-    lazy var typeRight = makeRightLabel(with: "None")
-    lazy var genderRight = makeRightLabel(with: "Male")
+    lazy var speciesRight = makeRightLabel(with: "Unknown")
+    lazy var typeRight = makeRightLabel(with: "Unknown")
+    lazy var genderRight = makeRightLabel(with: "Unknown")
     
     // MARK: - Containers
     private lazy var speciesContainer = makeLabelContainer(speciesLeft,

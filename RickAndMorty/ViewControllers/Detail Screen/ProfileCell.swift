@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileCell: UITableViewCell {
         
@@ -16,7 +17,6 @@ class ProfileCell: UITableViewCell {
         imageView.layer.cornerRadius = Constants.CornerRadius.profileImage
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "rick")
         return imageView
     }()
     
@@ -24,7 +24,6 @@ class ProfileCell: UITableViewCell {
         let label = UILabel()
         label.font = Constants.Font.profileName
         label.textColor = Constants.Color.white
-        label.text = "Rick Sanchez"
         return label
     }()
     
@@ -33,7 +32,6 @@ class ProfileCell: UITableViewCell {
         label.font = Constants.Font.stateOfLife
         label.textColor = Constants.Color.primary
         label.contentMode = .top
-        label.text = "Alive"
         return label
     }()
     
@@ -57,8 +55,6 @@ class ProfileCell: UITableViewCell {
     }
         
     private func setupViews() {
-        self.backgroundColor = Constants.Color.blackBG
-        
         self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -71,5 +67,24 @@ class ProfileCell: UITableViewCell {
             profileImageView.heightAnchor.constraint(equalToConstant: Constants.Constraints.cardImageSquareSize),
             profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
         ])
+    }
+    
+    public func configure(with character: Character) {
+        // touch control is disabled
+        isUserInteractionEnabled = false
+        self.backgroundColor = Constants.Color.blackBG
+
+        nameLabel.text = character.name
+        stateOfLifeLabel.text = character.status
+        let imageURL = URL(string: character.image ?? String())
+        
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(
+            with: imageURL,
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ]
+        )
     }
 }

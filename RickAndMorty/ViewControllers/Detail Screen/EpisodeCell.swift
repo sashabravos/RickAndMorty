@@ -12,12 +12,12 @@ class EpisodeCell: UITableViewCell {
     static let identifier = "EpisodeCell"
 
     private lazy var titleLabel: UILabel = {
-        let label = WhiteSemiBoldLabel(name: "Pilot")
+        let label = WhiteSemiBoldLabel()
         return label
     }()
         
     private lazy var episodeFeatures: UILabel = {
-        let label = SmallGreenLabel(name: "Episode 1, Season 1")
+        let label = SmallGreenLabel()
         return label
     }()
     
@@ -25,7 +25,6 @@ class EpisodeCell: UITableViewCell {
         let label = UILabel()
         label.font = Constants.Font.descriptionRight
         label.textColor = Constants.Color.textSecondary
-        label.text = "December 13, 2013"
         return label
     }()
     
@@ -50,7 +49,6 @@ class EpisodeCell: UITableViewCell {
     }
         
     private func setupViews() {
-        self.backgroundColor = Constants.Color.blackBG
         self.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -78,5 +76,15 @@ class EpisodeCell: UITableViewCell {
             episodeDate.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,
                                                   constant: -Constants.Constraints.profileSideGap)
         ])
+    }
+    
+    public func configure(with episode: Episode) {
+        // touch control is disabled
+        isUserInteractionEnabled = false
+        self.backgroundColor = Constants.Color.blackBG
+
+        titleLabel.text = episode.name
+        episodeFeatures.text = episode.episode?.convertToEpisodeTitle()
+        episodeDate.text = episode.airDate
     }
 }

@@ -68,7 +68,10 @@ final class CharactersViewController: UIViewController {
         isLoadingData = true
         
         do {
-            let characterModel = try await RequestManager.shared.getCharacters(with: currentPage)
+            let characterModel: CharactersModel =
+            try await RequestManager.shared.getInfo(dataType: .character,
+                                                    page: currentPage)
+            
             appendCharacters(characterModel.results, characterModel.info)
             
         } catch {
@@ -76,8 +79,8 @@ final class CharactersViewController: UIViewController {
         }
     }
     
-    func appendCharacters(_ charactersInfo: [Character],
-                          _ pageInfo: Info) {
+    private func appendCharacters(_ charactersInfo: [Character],
+                                  _ pageInfo: Info) {
         characters.append(contentsOf: charactersInfo)
         collectionView.reloadData()
         
@@ -87,7 +90,7 @@ final class CharactersViewController: UIViewController {
         }
     }
     
-    func handleError(_ error: Error) {
+    private func handleError(_ error: Error) {
         print("Ошибка декодирования данных: \(error)")
         isLoadingData = false
     }

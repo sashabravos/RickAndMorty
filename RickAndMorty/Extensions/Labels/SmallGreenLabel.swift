@@ -9,7 +9,7 @@ import UIKit
 
 class SmallGreenLabel: UILabel {
         
-    init(name: String) {
+    init(name: String? = nil) {
         super.init(frame: .zero)
         self.font = Constants.Font.descriptionLeft
         self.textColor = Constants.Color.primary

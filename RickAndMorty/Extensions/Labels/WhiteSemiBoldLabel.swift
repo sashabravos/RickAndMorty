@@ -9,7 +9,7 @@ import UIKit
 
 class WhiteSemiBoldLabel: UILabel {
         
-    init(name: String) {
+    init(name: String? = nil) {
         super.init(frame: .zero)
         self.font = Constants.Font.titleSecondary
         self.textColor = Constants.Color.white
