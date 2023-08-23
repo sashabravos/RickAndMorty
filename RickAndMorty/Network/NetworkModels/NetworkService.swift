@@ -7,9 +7,10 @@
 
 import Foundation
 
-class NetworkService {
+final class NetworkService {
     static let shared = NetworkService()
 
+    // MARK: - Public Methods -
     func loadCharacterLocation(_ selectedCharacter: Character,
                                completion: @escaping (Location?) -> Void) {
         if let locationNumber = selectedCharacter.origin?.url?.split(separator: "/").last,
@@ -44,8 +45,13 @@ class NetworkService {
         }
     }
 
+    func getCharacters(page: Int, completion: @escaping (CharactersModel) -> Void) {
+        loadCharacters(page: page, completion: completion)
+    }
+
+    // MARK: - Private Methods -
     private func loadEpisode(_ episodes: [String],
-                     completion: @escaping (Episode?) -> Void)  {
+                             completion: @escaping (Episode?) -> Void)  {
         episodes.forEach { episodeURLString in
             if let episodeNumber = episodeURLString.split(separator: "/").last,
                let episodeID = Int(episodeNumber) {
@@ -61,6 +67,19 @@ class NetworkService {
                 }
             } else {
                 completion(nil)
+            }
+        }
+    }
+
+    private func loadCharacters(page: Int,
+                                completion: @escaping (CharactersModel) -> Void)  {
+        Task {
+            do {
+                let characterModel: CharactersModel =
+                try await RequestManager.shared.getInfo(dataType: .character,page: page)
+                completion(characterModel)
+            } catch {
+                print("Ошибка декодирования данных: \(error)")
             }
         }
     }

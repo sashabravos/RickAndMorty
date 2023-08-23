@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0307AB422B093F4900411F65 /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AB412B093F4900411F65 /* CharactersViewModel.swift */; };
+		0307AB442B093FB200411F65 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AB432B093FB200411F65 /* ProfileViewModel.swift */; };
 		0341E3822AFA44A400C80DA0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341E3812AFA44A400C80DA0 /* NetworkService.swift */; };
 		0341E3842AFA59A900C80DA0 /* EpisodeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341E3832AFA59A900C80DA0 /* EpisodeSection.swift */; };
 		0341E38A2AFB7B7D00C80DA0 /* CharacterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341E3892AFB7B7D00C80DA0 /* CharacterSection.swift */; };
@@ -14,6 +16,12 @@
 		034CEC372AD3123500EB2946 /* SwiftUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CEC362AD3123500EB2946 /* SwiftUIConstants.swift */; };
 		034CEC3A2AD3233600EB2946 /* CharacterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CEC392AD3233600EB2946 /* CharacterImageView.swift */; };
 		034CEC3F2AD329AC00EB2946 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 034CEC3E2AD329AC00EB2946 /* Kingfisher */; };
+		03792C8B2B0CB6C7009A968B /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C8A2B0CB6C7009A968B /* CombineMoya */; };
+		03792C8D2B0CB6C7009A968B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C8C2B0CB6C7009A968B /* Moya */; };
+		03792C8F2B0CB6C7009A968B /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C8E2B0CB6C7009A968B /* ReactiveMoya */; };
+		03792C912B0CB6C7009A968B /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C902B0CB6C7009A968B /* RxMoya */; };
+		03792C942B0CB701009A968B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C932B0CB701009A968B /* SnapKit */; };
+		03792C962B0CB701009A968B /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 03792C952B0CB701009A968B /* SnapKit-Dynamic */; };
 		037D161F2A93C4E3000F4AB8 /* StackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037D161E2A93C4E3000F4AB8 /* StackView+Extension.swift */; };
 		037D162C2A93E6CA000F4AB8 /* WhiteSemiBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037D162B2A93E6CA000F4AB8 /* WhiteSemiBoldLabel.swift */; };
 		037D162F2A93E9C8000F4AB8 /* SmallGreenLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037D162E2A93E9C8000F4AB8 /* SmallGreenLabel.swift */; };
@@ -37,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0307AB412B093F4900411F65 /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
+		0307AB432B093FB200411F65 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0341E3812AFA44A400C80DA0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0341E3832AFA59A900C80DA0 /* EpisodeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeSection.swift; sourceTree = "<group>"; };
 		0341E3892AFB7B7D00C80DA0 /* CharacterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSection.swift; sourceTree = "<group>"; };
@@ -74,30 +84,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03792C912B0CB6C7009A968B /* RxMoya in Frameworks */,
 				034CEC3F2AD329AC00EB2946 /* Kingfisher in Frameworks */,
 				F7B132F5E648FF216D403C6A /* Pods_RickAndMorty.framework in Frameworks */,
+				03792C962B0CB701009A968B /* SnapKit-Dynamic in Frameworks */,
+				03792C942B0CB701009A968B /* SnapKit in Frameworks */,
+				03792C8D2B0CB6C7009A968B /* Moya in Frameworks */,
+				03792C8F2B0CB6C7009A968B /* ReactiveMoya in Frameworks */,
+				03792C8B2B0CB6C7009A968B /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0341E3852AFA699B00C80DA0 /* Details */ = {
+		0307AB452B093FB900411F65 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				03A9D1CC2ACABB1B006B4899 /* ProfileView.swift */,
+				0341E3852AFA699B00C80DA0 /* Components */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0341E3852AFA699B00C80DA0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				034CEC392AD3233600EB2946 /* CharacterImageView.swift */,
 				0341E3832AFA59A900C80DA0 /* EpisodeSection.swift */,
 			);
-			name = Details;
+			name = Components;
 			sourceTree = "<group>";
 		};
-		0341E3882AFB7B4E00C80DA0 /* SwiftUi */ = {
+		0341E3882AFB7B4E00C80DA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */,
 				0341E3892AFB7B7D00C80DA0 /* CharacterSection.swift */,
 				0341E38B2AFB8E5E00C80DA0 /* CharactersView.swift */,
 			);
-			path = SwiftUi;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		037D161D2A93C4C3000F4AB8 /* Extensions */ = {
@@ -161,7 +187,8 @@
 			children = (
 				03F9C0B52A928D34001C28BD /* AppResources */,
 				037D16342A9415FA000F4AB8 /* Network */,
-				03F9C0B72A928D4D001C28BD /* ViewControllers */,
+				03F9C0D12A939746001C28BD /* CharactersScreen */,
+				03F9C0D22A939754001C28BD /* DetailScreen */,
 				03F9C0BD2A92C309001C28BD /* Sourses */,
 				037D161D2A93C4C3000F4AB8 /* Extensions */,
 				03F9C0B62A928D42001C28BD /* Storyboards */,
@@ -187,15 +214,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		03F9C0B72A928D4D001C28BD /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				03F9C0D12A939746001C28BD /* CharactersScreen */,
-				03F9C0D22A939754001C28BD /* DetailScreen */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		03F9C0BD2A92C309001C28BD /* Sourses */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,9 +231,9 @@
 		03F9C0D12A939746001C28BD /* CharactersScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0341E3882AFB7B4E00C80DA0 /* SwiftUi */,
-				03F9C0BB2A92A8B0001C28BD /* CharacterCard.swift */,
+				0307AB412B093F4900411F65 /* CharactersViewModel.swift */,
 				03F9C0A52A928B92001C28BD /* CharactersViewController.swift */,
+				0341E3882AFB7B4E00C80DA0 /* Views */,
 			);
 			path = CharactersScreen;
 			sourceTree = "<group>";
@@ -223,8 +241,8 @@
 		03F9C0D22A939754001C28BD /* DetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				03A9D1CC2ACABB1B006B4899 /* ProfileView.swift */,
-				0341E3852AFA699B00C80DA0 /* Details */,
+				0307AB452B093FB900411F65 /* Views */,
+				0307AB432B093FB200411F65 /* ProfileViewModel.swift */,
 			);
 			path = DetailScreen;
 			sourceTree = "<group>";
@@ -265,6 +283,12 @@
 			name = RickAndMorty;
 			packageProductDependencies = (
 				034CEC3E2AD329AC00EB2946 /* Kingfisher */,
+				03792C8A2B0CB6C7009A968B /* CombineMoya */,
+				03792C8C2B0CB6C7009A968B /* Moya */,
+				03792C8E2B0CB6C7009A968B /* ReactiveMoya */,
+				03792C902B0CB6C7009A968B /* RxMoya */,
+				03792C932B0CB701009A968B /* SnapKit */,
+				03792C952B0CB701009A968B /* SnapKit-Dynamic */,
 			);
 			productName = RickAndMorty;
 			productReference = 03F9C09E2A928B92001C28BD /* RickAndMorty.app */;
@@ -296,6 +320,8 @@
 			mainGroup = 03F9C0952A928B92001C28BD;
 			packageReferences = (
 				034CEC3D2AD329AC00EB2946 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */,
+				03792C922B0CB701009A968B /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 03F9C09F2A928B92001C28BD /* Products */;
 			projectDirPath = "";
@@ -366,8 +392,10 @@
 				03A9D1CD2ACABB1B006B4899 /* ProfileView.swift in Sources */,
 				03F9C0A62A928B92001C28BD /* CharactersViewController.swift in Sources */,
 				037D162F2A93E9C8000F4AB8 /* SmallGreenLabel.swift in Sources */,
+				0307AB422B093F4900411F65 /* CharactersViewModel.swift in Sources */,
 				03F9C0BC2A92A8B0001C28BD /* CharacterCard.swift in Sources */,
 				03F9C0A22A928B92001C28BD /* AppDelegate.swift in Sources */,
+				0307AB442B093FB200411F65 /* ProfileViewModel.swift in Sources */,
 				034CEC3A2AD3233600EB2946 /* CharacterImageView.swift in Sources */,
 				03F9C0A42A928B92001C28BD /* SceneDelegate.swift in Sources */,
 				037D163A2A94190F000F4AB8 /* EpisodesModel.swift in Sources */,
@@ -592,6 +620,22 @@
 				minimumVersion = 7.9.1;
 			};
 		};
+		03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		03792C922B0CB701009A968B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -599,6 +643,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 034CEC3D2AD329AC00EB2946 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		03792C8A2B0CB6C7009A968B /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		03792C8C2B0CB6C7009A968B /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		03792C8E2B0CB6C7009A968B /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		03792C902B0CB6C7009A968B /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C892B0CB6C7009A968B /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		03792C932B0CB701009A968B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C922B0CB701009A968B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		03792C952B0CB701009A968B /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03792C922B0CB701009A968B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

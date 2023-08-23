@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+//    @StateObject var viewModel: ProfileViewModel
     @State var episodes: [Episode] = []
 
     var characterModel: Character

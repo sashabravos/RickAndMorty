@@ -16,8 +16,10 @@ struct CharacterImageView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: Constants.Constraints.cardImageSquareSize,
-                           height: Constants.Constraints.cardImageSquareSize)
+                    .frame(
+                        width: Constants.Constraints.cardImageSquareSize,
+                        height: Constants.Constraints.cardImageSquareSize
+                    )
                     .cornerRadius(Constants.CornerRadius.profileImage)
                     .padding(8)
             case .failure(_), .empty:

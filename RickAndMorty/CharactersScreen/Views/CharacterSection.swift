@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct CharacterSection: View {
-    var defaultURL = URL(string: "https://bogatyr.club/uploads/posts/2021-11/thumbs/1636951185_1-bogatyr-club-p-polnostyu-chyornii-fon-bez-nichego-1.jpg")
-    var defaultText = "Rick Sanchez"
+    var character: Character
+    var didSectionTapped: (Character) -> Void
 
     var body: some View {
-        VStack {
-            CharacterImageView(imageURL: defaultURL)
+        VStack(spacing: 0) {
+            CharacterImageView(imageURL: URL(string:character.image ?? ""))
 
-            Text(defaultText)
+            Text(character.name)
                 .font(SwiftUIConstants.Fonts.characterCardName)
                 .foregroundColor(.white)
                 .frame(height: Constants.Constraints.cardTitleHeight)
@@ -23,9 +23,8 @@ struct CharacterSection: View {
         }
         .background(Color(uiColor: Constants.Color.blackCard))
         .cornerRadius(Constants.CornerRadius.cellCard)
+        .onTapGesture {
+            self.didSectionTapped(character)
+        }
     }
-}
-
-#Preview {
-    CharacterSection()
 }

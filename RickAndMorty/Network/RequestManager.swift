@@ -23,11 +23,11 @@ final class RequestManager {
                                       page: Int? = nil) async throws -> T {
         var urlString = "\(baseUrl)/\(dataType.rawValue)"
         
-        if let id = id {
+        if let id {
             urlString += "/\(id)"
         }
         
-        if let page = page {
+        if let page {
             urlString += "?page=\(page)"
         }
         
