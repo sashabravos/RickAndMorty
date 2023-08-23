@@ -126,7 +126,9 @@ final class CharactersViewController: UIViewController {
 
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCharacter = characters[indexPath.item]
         let profileVC = ProfileViewController()
+        profileVC.selectedCharacter = selectedCharacter
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }

@@ -58,6 +58,7 @@ class InfoAndHeadersCell: UITableViewCell {
     }
     
     private func setupViews() {
+        self.backgroundColor = Constants.Color.blackBG
         self.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -90,7 +91,6 @@ class InfoAndHeadersCell: UITableViewCell {
                           by character: Character) {
         // touch control is disabled
         isUserInteractionEnabled = false
-        self.backgroundColor = Constants.Color.blackBG
         
         if let name = location.name,
            let type = location.type {

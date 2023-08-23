@@ -9,8 +9,9 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    var selectedCharacter: Character!
+
     private var profileModel: ProfileModel!
-    private var chosenCharacter: Character!
     private lazy var episodes: [String] = []
     private lazy var originURL = ""
     
@@ -25,36 +26,18 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
-        Task {
-            await loadData()
-        }
+        prepareProfileInfo(with: selectedCharacter)
     }
     
-    private func loadData() async {
-        do {
-            let characterInfo: Character = try await RequestManager.shared.getInfo(dataType: .character, id: 1)
-            
-            let profileModel = ProfileModel(character: characterInfo)
-            prepareProfileInfo(with: profileModel)
-            
-        } catch {
-            print("Ошибка декодирования данных: \(error)")
-        }
-    }
-    
-    private func prepareProfileInfo(with profileModel: ProfileModel) {
-        
-        chosenCharacter = profileModel.character
-        
-        if let planetURL = profileModel.character.origin?.url {
+    private func prepareProfileInfo(with profileInfo: Character) {
+        if let planetURL = profileInfo.origin?.url {
             originURL = planetURL
         }
         
-        if let episodesList = profileModel.character.episode {
+        if let episodesList = profileInfo.episode {
             episodes = episodesList
         }
         
-        self.profileModel = profileModel
         tableView.reloadData()
     }
     
@@ -96,7 +79,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 0:
             let profileCell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier,
                                                             for: indexPath) as! ProfileCell
-            if let character = profileModel?.character {
+            if let character = selectedCharacter {
                 profileCell.configure(with: character)
             }
             return profileCell
@@ -109,7 +92,7 @@ extension ProfileViewController: UITableViewDataSource {
                     do {
                 let locationInfo: Location
                         = try await RequestManager.shared.getInfo(dataType: .location, id: locationID)
-                        infoCell.configure(with: locationInfo, by: chosenCharacter)
+                        infoCell.configure(with: locationInfo, by: selectedCharacter)
                     } catch {
                         print("Ошибка декодирования данных: \(error)")
                     }
