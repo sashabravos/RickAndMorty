@@ -15,9 +15,10 @@ class OriginView: UIView {
     private lazy var planetImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = Constants.CornerRadius.planetImage
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .center
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "rick")
+        imageView.backgroundColor = Constants.Color.blackElements
+        imageView.image = Constants.Image.planet
         return imageView
     }()
   
@@ -42,7 +43,7 @@ class OriginView: UIView {
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: Constants.Constraints.originCardHeight),
             
-            planetImageView.heightAnchor.constraint(equalToConstant: Constants.Constraints.planetImageSize),
+            planetImageView.heightAnchor.constraint(equalToConstant: Constants.Constraints.planetImageViewSize),
             planetImageView.heightAnchor.constraint(equalTo: planetImageView.widthAnchor),
             planetImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                      constant: Constants.Constraints.planetImageBorderGap),

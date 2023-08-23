@@ -41,7 +41,7 @@ class InfoAndHeadersCell: UITableViewCell {
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 16
+        stackView.spacing = Constants.Constraints.profileVerticalGap
         stackView.addSomeSubviews([infoLabel, infoStackView,
                                    originLabel, originView,
                                    episodesLabel])
