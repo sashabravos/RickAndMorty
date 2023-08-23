@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmallGreenLabel: UILabel {
+final class SmallGreenLabel: UILabel {
         
     init(name: String? = nil) {
         super.init(frame: .zero)

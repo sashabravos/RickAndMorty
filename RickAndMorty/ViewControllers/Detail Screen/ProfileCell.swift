@@ -8,8 +8,10 @@
 import UIKit
 import Kingfisher
 
-class ProfileCell: UITableViewCell {
+final class ProfileCell: UITableViewCell {
         
+    // MARK: - Properties
+
     static let identifier = "ProfileCell"
 
     private lazy var profileImageView: UIImageView = {
@@ -41,9 +43,11 @@ class ProfileCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Constants.Constraints.profileVerticalGap
-        stackView.addSomeSubviews([profileImageView, nameLabel, stateOfLifeLabel])
+        stackView.addArrangedSubviews([profileImageView, nameLabel, stateOfLifeLabel])
         return stackView
     }()
+
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,7 +57,9 @@ class ProfileCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+    
+    // MARK: - Private Methods
+
     private func setupViews() {
         self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +75,8 @@ class ProfileCell: UITableViewCell {
         ])
     }
     
+    // MARK: - Public Methods
+
     public func configure(with character: Character) {
         // touch control is disabled
         isUserInteractionEnabled = false

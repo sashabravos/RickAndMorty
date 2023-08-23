@@ -17,6 +17,7 @@ final class RequestManager {
         case character, location, episode
     }
     
+    /// Use with any NetworkModel, id could be character or something else ID
     public func getInfo<T: Decodable>(dataType: DataType,
                                       id: Int? = nil,
                                       page: Int? = nil) async throws -> T {
@@ -35,6 +36,7 @@ final class RequestManager {
         return try decodeData(T.self, from: data)
     }
     
+    /// Universal function to decode
     private func decodeData<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: data)

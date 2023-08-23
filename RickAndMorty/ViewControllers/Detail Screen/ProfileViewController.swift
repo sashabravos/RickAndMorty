@@ -9,12 +9,14 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var selectedCharacter: Character!
-
-    private var profileModel: ProfileModel!
     private lazy var episodes: [String] = []
     private lazy var originURL = ""
     
+    // MARK: - UI Elements
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -22,38 +24,28 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
         setupTableView()
         prepareProfileInfo(with: selectedCharacter)
     }
     
+    // MARK: - UI Setup
+
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = Constants.Color.white
         navigationController?.navigationBar.barTintColor = Constants.Color.blackBG
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.hidesBarsOnSwipe = true
     }
-    private func prepareProfileInfo(with profileInfo: Character) {
-        if let planetURL = profileInfo.origin?.url {
-            originURL = planetURL
-        }
-        
-        if let episodesList = profileInfo.episode {
-            episodes = episodesList
-        }
-        
-        tableView.reloadData()
-    }
     
     private func setupTableView() {
         view.addSubview(tableView)
-        
         tableView.dataSource = self
         tableView.backgroundColor = Constants.Color.blackBG
-        
         tableView.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         tableView.register(InfoAndHeadersCell.self, forCellReuseIdentifier: InfoAndHeadersCell.identifier)
         tableView.register(EpisodeCell.self, forCellReuseIdentifier: EpisodeCell.identifier)
@@ -68,28 +60,32 @@ final class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var sectionCount = 0
-        
-        if section == 0 || section == 1 {
-            sectionCount = 1
-        } else if section == 2 {
-            sectionCount = episodes.count
+        switch section {
+        case 0, 1: return 1
+        case 2: return episodes.count
+        default: return 0
         }
-        return sectionCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let profileCell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier,
+            let profileCell = tableView.dequeueReusableCell(
+                withIdentifier: ProfileCell.identifier,
                                                             for: indexPath) as! ProfileCell
             profileCell.configure(with: selectedCharacter)
             return profileCell
         case 1:
-            let infoCell = tableView.dequeueReusableCell(withIdentifier: InfoAndHeadersCell.identifier,
+            let infoCell = tableView.dequeueReusableCell(
+                withIdentifier: InfoAndHeadersCell.identifier,
                                                          for: indexPath) as! InfoAndHeadersCell
             loadLocationInfo { locationInfo in
                 if let locationInfo = locationInfo {
@@ -98,9 +94,9 @@ extension ProfileViewController: UITableViewDataSource {
             }
             return infoCell
         case 2:
-            let episodeCell = tableView.dequeueReusableCell(withIdentifier: EpisodeCell.identifier,
-                                                            for: indexPath) as! EpisodeCell
-            
+            let episodeCell = tableView.dequeueReusableCell(
+                withIdentifier: EpisodeCell.identifier,
+                for: indexPath) as! EpisodeCell
             loadEpisodeInfo(indexPath: indexPath) { episodeInfo in
                 if let episodeInfo = episodeInfo {
                     episodeCell.configure(with: episodeInfo)
@@ -111,13 +107,24 @@ extension ProfileViewController: UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
 }
 
+// MARK: - Data Loading
+
 extension ProfileViewController {
+    
+    private func prepareProfileInfo(with profileInfo: Character) {
+            if let planetURL = profileInfo.origin?.url {
+                originURL = planetURL
+            }
+            
+            if let episodesList = profileInfo.episode {
+                episodes = episodesList
+            }
+            
+            tableView.reloadData()
+        }
+    
     private func loadLocationInfo(completion: @escaping (Location?) -> Void) {
         if let locationNumber = selectedCharacter.origin?.url?.split(separator: "/").last,
            let locationID = Int(locationNumber) {

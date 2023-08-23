@@ -8,7 +8,8 @@
 import UIKit
 
 extension UIStackView {
-    public func addSomeSubviews(_ views: [UIView]) {
+    /// Add array of views
+    public func addArrangedSubviews(_ views: [UIView]) {
         views.forEach { view in
             self.addArrangedSubview(view)
             self.translatesAutoresizingMaskIntoConstraints = false

@@ -9,10 +9,14 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
     
+    // MARK: - Properties
+
     private lazy var characters: [Character] = []
     private lazy var currentPage = 1
     private lazy var isLoadingData = false
     
+    // MARK: - UI Elements
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Characters"
@@ -48,10 +52,12 @@ final class CharactersViewController: UIViewController {
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.spacing = Constants.Constraints.charactersVerticalGap
-        stackView.addSomeSubviews([titleLabel, collectionView])
+        stackView.addArrangedSubviews([titleLabel, collectionView])
         return stackView
     }()
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +68,85 @@ final class CharactersViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Setup
+
+    private func superviewSettings() {
+        view.backgroundColor = Constants.Color.blackBG
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.prefetchDataSource = self
+    }
+    
+    private func setupSubviews() {
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.topAnchor,
+                                           constant: Constants.Constraints.charactersVerticalGap),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                               constant: Constants.Constraints.charactersSideGap),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                constant: -Constants.Constraints.charactersSideGap),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            titleLabel.heightAnchor.constraint(equalToConstant: Constants.Constraints.charactersTitleHeight),
+            
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
+                                                constant: Constants.Constraints.charactersVerticalGap)
+        ])
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension CharactersViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCharacter = characters[indexPath.item]
+        let profileVC = ProfileViewController()
+        profileVC.selectedCharacter = selectedCharacter
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension CharactersViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return characters.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCard.identifier,
+                                                         for: indexPath) as? CharacterCard {
+            let person = characters[indexPath.row]
+            cell.configure(with: person)
+            
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension CharactersViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if let lastIndexPath = indexPaths.last,
+            lastIndexPath.row >= characters.count - 1 {
+            Task {
+                await loadData()
+            }
+        }
+    }
+}
+
+// MARK: - Data Loading
+
+extension CharactersViewController {
+
     private func loadData() async {
         guard !isLoadingData else { return }
         
@@ -93,71 +178,5 @@ final class CharactersViewController: UIViewController {
     private func handleError(_ error: Error) {
         print("Ошибка декодирования данных: \(error)")
         isLoadingData = false
-    }
-    
-    private func superviewSettings() {
-        view.backgroundColor = Constants.Color.blackBG
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.prefetchDataSource = self
-    }
-    
-    private func setupSubviews() {
-        view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor,
-                                           constant: Constants.Constraints.charactersVerticalGap),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                               constant: Constants.Constraints.charactersSideGap),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                constant: -Constants.Constraints.charactersSideGap),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            titleLabel.heightAnchor.constraint(equalToConstant: Constants.Constraints.charactersTitleHeight),
-            
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
-                                                constant: Constants.Constraints.charactersVerticalGap)
-        ])
-    }
-}
-
-extension CharactersViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCharacter = characters[indexPath.item]
-        let profileVC = ProfileViewController()
-        profileVC.selectedCharacter = selectedCharacter
-        navigationController?.pushViewController(profileVC, animated: true)
-    }
-}
-
-extension CharactersViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return characters.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCard.identifier,
-                                                         for: indexPath) as? CharacterCard {
-            let person = characters[indexPath.row]
-            cell.configure(with: person)
-            
-            return cell
-        }
-        return UICollectionViewCell()
-    }
-}
-
-extension CharactersViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if let lastIndexPath = indexPaths.last,
-            lastIndexPath.row >= characters.count - 1 {
-            Task {
-                await loadData()
-            }
-        }
     }
 }

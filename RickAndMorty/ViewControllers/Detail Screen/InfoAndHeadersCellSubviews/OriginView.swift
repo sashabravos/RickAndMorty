@@ -1,5 +1,5 @@
 //
-//  OriginStackView.swift
+//  OriginView.swift
 //  RickAndMorty
 //
 //  Created by Александра Кострова on 21.08.2023.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-class OriginView: UIView {
+final class OriginView: UIView {
     
-    // MARK: - Planet Features
-    lazy var planetName = WhiteSemiBoldLabel(name: "Unknown")
-    lazy var planetType = SmallGreenLabel(name: "Unknown")
+    // MARK: - Properties
+    
     private lazy var planetImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = Constants.CornerRadius.planetImage
@@ -21,7 +20,12 @@ class OriginView: UIView {
         imageView.image = Constants.Image.planet
         return imageView
     }()
-  
+    
+    lazy var planetName = WhiteSemiBoldLabel(name: "Unknown")
+    lazy var planetType = SmallGreenLabel(name: "Unknown")
+
+    // MARK: - Initialization
+    
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -31,10 +35,13 @@ class OriginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
+    
     private func setupViews() {
         self.layer.cornerRadius = Constants.CornerRadius.profileAnyCard
         self.backgroundColor = Constants.Color.blackCard
         self.translatesAutoresizingMaskIntoConstraints = false
+        
         [planetImageView, planetName, planetType].forEach {
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

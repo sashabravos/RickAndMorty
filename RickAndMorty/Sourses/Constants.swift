@@ -8,6 +8,7 @@
 import UIKit
 
 enum Constants {
+    // Сlick on the square to change its color.
     enum Color {
         static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         static let primary = #colorLiteral(red: 0.2784313725, green: 0.7764705882, blue: 0.0431372549, alpha: 1)
@@ -79,6 +80,7 @@ enum Constants {
     }
     
     enum Image {
+        // Profile Screen
         static let planet = UIImage(named: "planet")
     }
 }

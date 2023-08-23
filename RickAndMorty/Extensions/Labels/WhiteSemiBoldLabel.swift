@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WhiteSemiBoldLabel: UILabel {
+final class WhiteSemiBoldLabel: UILabel {
         
     init(name: String? = nil) {
         super.init(frame: .zero)

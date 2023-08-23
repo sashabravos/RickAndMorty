@@ -7,8 +7,10 @@
 
 import UIKit
 
-class EpisodeCell: UITableViewCell {
+final class EpisodeCell: UITableViewCell {
         
+    // MARK: - Properties
+
     static let identifier = "EpisodeCell"
 
     private lazy var titleLabel: UILabel = {
@@ -38,6 +40,8 @@ class EpisodeCell: UITableViewCell {
         }
         return view
     }()
+    
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,6 +51,8 @@ class EpisodeCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Methods
         
     private func setupViews() {
         self.addSubview(containerView)
@@ -77,6 +83,8 @@ class EpisodeCell: UITableViewCell {
                                                   constant: -Constants.Constraints.profileSideGap)
         ])
     }
+    
+    // MARK: - Public Methods
     
     public func configure(with episode: Episode) {
         // touch control is disabled

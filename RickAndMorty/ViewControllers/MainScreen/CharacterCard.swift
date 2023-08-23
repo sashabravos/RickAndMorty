@@ -10,9 +10,11 @@ import Kingfisher
 
 final class CharacterCard: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     static let identifier = "CharacterCell"
     
-    let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
@@ -20,7 +22,7 @@ final class CharacterCard: UICollectionViewCell {
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.Font.characterCardName
         label.textColor = Constants.Color.white
@@ -29,15 +31,18 @@ final class CharacterCard: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Methods
     
     private func setupViews() {
         
@@ -60,6 +65,8 @@ final class CharacterCard: UICollectionViewCell {
             titleLabel.heightAnchor.constraint(equalToConstant: Constants.Constraints.cardTitleHeight)
         ])
     }
+    
+    // MARK: - Public Methods
     
     public func configure(with model: Character) {
         self.layer.cornerRadius = Constants.CornerRadius.cellCard

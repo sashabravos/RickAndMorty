@@ -7,8 +7,10 @@
 
 import UIKit
 
-class InfoAndHeadersCell: UITableViewCell {
+final class InfoAndHeadersCell: UITableViewCell {
     
+    // MARK: - Properties
+
     static let identifier = "InfoAndHeadersCell"
     
     private lazy var infoLabel: UILabel = {
@@ -42,12 +44,14 @@ class InfoAndHeadersCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Constants.Constraints.profileVerticalGap
-        stackView.addSomeSubviews([infoLabel, infoStackView,
+        stackView.addArrangedSubviews([infoLabel, infoStackView,
                                    originLabel, originView,
                                    episodesLabel])
         return stackView
     }()
     
+    // MARK: - Initializers
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -57,6 +61,8 @@ class InfoAndHeadersCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
+
     private func setupViews() {
         // touch control is disabled
         isUserInteractionEnabled = false
@@ -90,6 +96,9 @@ class InfoAndHeadersCell: UITableViewCell {
             episodesLabel.heightAnchor.constraint(equalTo: infoLabel.heightAnchor)
         ])
     }
+    
+    // MARK: - Public Methods
+
     public func configure(with location: Location,
                           by character: Character) {
         
