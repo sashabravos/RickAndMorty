@@ -26,6 +26,8 @@ final class CharacterCard: UICollectionViewCell {
         let label = UILabel()
         label.font = Constants.Font.characterCardName
         label.textColor = Constants.Color.white
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
@@ -59,6 +61,10 @@ final class CharacterCard: UICollectionViewCell {
             imageView.heightAnchor.constraint(equalToConstant: Constants.Constraints.cardImageSquareSize),
             imageView.widthAnchor.constraint(equalToConstant: Constants.Constraints.cardImageSquareSize),
             
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor,
+                                                constant: Constants.Constraints.cardImageBorderGap),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor,
+                                                 constant: -Constants.Constraints.cardImageBorderGap),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor,
                                             constant: Constants.Constraints.cardTitleTop),
