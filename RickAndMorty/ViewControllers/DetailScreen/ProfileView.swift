@@ -17,7 +17,7 @@ struct ProfileView: View {
 
     var body: some View {
         ScrollView {
-            ProfileImageView(imageURL: URL(string: characterModel.image ?? ""))
+            CharacterImageView(imageURL: URL(string: characterModel.image ?? ""))
 
             Text(characterModel.name)
                 .font(SwiftUIConstants.Fonts.profileName)

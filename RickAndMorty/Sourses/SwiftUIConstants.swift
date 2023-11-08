@@ -9,6 +9,11 @@ import SwiftUI
 
 enum SwiftUIConstants {
     enum Fonts {
+        // Characters
+        static let charactersTitle =  Font.custom("Gilroy-Bold", size: 28.0)
+        static let characterCardName = Font.custom("Gilroy-SemiBold", size: 17.0)
+
+        // Profile
         static let profileName = Font.custom("Gilroy-Bold", size: 22)
         static let stateOfLife = Font.custom("Gilroy-Medium", size: 16.0)
         static let titleSecondary = Font.custom("Gilroy-SemiBold", size: 17.0)

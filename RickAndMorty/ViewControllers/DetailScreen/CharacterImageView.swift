@@ -1,5 +1,5 @@
 //
-//  ProfileImageView.swift
+//  CharacterImageView.swift
 //  RickAndMorty
 //
 //  Created by Александра Кострова on 08.10.2023.
@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct ProfileImageView: View {
+struct CharacterImageView: View {
     var imageURL: URL?
     var body: some View {
-        AsyncImage(url: imageURL)
-        { phase in
+        AsyncImage(url: imageURL) { phase in
             switch phase {
             case .success(let image):
                 image
