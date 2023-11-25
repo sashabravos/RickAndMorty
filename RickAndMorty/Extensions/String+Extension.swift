@@ -6,8 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension String {
+    init(_ constant: StringConstants) {
+        self.init(constant.rawValue)
+    }
+
     /// Convert "S01E06" format to "Episode 6, Season1"
     func convertToEpisodeTitle() -> String {
         let components = self.components(separatedBy: "E")
@@ -17,7 +22,23 @@ extension String {
         else {
             return self
         }
-        
+
         return "Episode \(episodeNumber), Season \(seasonNumber)"
     }
+}
+
+extension Text {
+    init(_ constant: StringConstants) {
+        self.init(constant.rawValue)
+    }
+}
+
+enum StringConstants: String {
+    static let noInfo = "Unknown"
+
+    case info = "Info"
+    case species = "Species:"
+    case type = "Type:"
+    case gender = "Gender:"
+    case origin = "Origin"
 }

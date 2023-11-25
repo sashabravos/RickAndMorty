@@ -10,6 +10,12 @@ import Foundation
 final class NetworkService {
     static let shared = NetworkService()
 
+    enum DataType: String {
+        case character, location, episode
+    }
+
+    private let baseUrl = "https://rickandmortyapi.com/api"
+
     // MARK: - Public Methods -
     func loadCharacterLocation(_ selectedCharacter: Character,
                                completion: @escaping (Location?) -> Void) {
@@ -18,7 +24,7 @@ final class NetworkService {
             Task {
                 do {
                     let locationInfo: Location =
-                    try await RequestManager.shared.getInfo(dataType: .location, id: locationID)
+                    try await getInfo(dataType: .location, id: locationID)
                     completion(locationInfo)
                 } catch {
                     print("Ошибка декодирования данных: \(error)")
@@ -58,7 +64,7 @@ final class NetworkService {
                 Task {
                     do {
                         let episode: Episode =
-                        try await RequestManager.shared.getInfo(dataType: .episode, id: episodeID)
+                        try await getInfo(dataType: .episode, id: episodeID)
                         completion(episode)
                     } catch {
                         print("Ошибка декодирования данных: \(error)")
@@ -76,11 +82,36 @@ final class NetworkService {
         Task {
             do {
                 let characterModel: CharactersModel =
-                try await RequestManager.shared.getInfo(dataType: .character,page: page)
+                try await getInfo(dataType: .character,page: page)
                 completion(characterModel)
             } catch {
                 print("Ошибка декодирования данных: \(error)")
             }
         }
+    }
+
+    /// Use with any NetworkModel, id could be character or something else ID
+    private func getInfo<T: Decodable>(dataType: DataType,
+                                      id: Int? = nil,
+                                      page: Int? = nil) async throws -> T {
+        var urlString = "\(baseUrl)/\(dataType.rawValue)"
+
+        if let id {
+            urlString += "/\(id)"
+        }
+
+        if let page {
+            urlString += "?page=\(page)"
+        }
+
+        let url = URL(string: urlString)!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try decodeData(T.self, from: data)
+    }
+
+    /// Universal function to decode
+    private func decodeData<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
     }
 }

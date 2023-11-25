@@ -16,7 +16,9 @@ struct CharacterSection: View {
             CharacterImageView(imageURL: URL(string:character.image ?? ""))
 
             Text(character.name)
-                .font(SwiftUIConstants.Fonts.characterCardName)
+                .font(Constants.Fonts.characterCardName)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .foregroundColor(.white)
                 .frame(height: Constants.Constraints.cardTitleHeight)
                 .padding(16)

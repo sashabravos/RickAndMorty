@@ -8,14 +8,13 @@
 import Combine
 import SnapKit
 import SwiftUI
-import UIKit
 
 final class CharactersViewController: UIViewController {
     // MARK: - Properties -
     private let viewModel: CharactersViewModel
     private var receiveQueue: DispatchQueue
     private var cancellables = Set<AnyCancellable>()
-
+    
     // MARK: - Initialisation -
     init(viewModel: CharactersViewModel,
          receiveQueue: DispatchQueue = .main) {
@@ -23,26 +22,26 @@ final class CharactersViewController: UIViewController {
         self.receiveQueue = receiveQueue
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCharacterView()
         sinkForProfileSubject()
     }
-
+    
     // MARK: - Private methods -
     private func setupCharacterView() {
         let view = CharactersView(viewModel: self.viewModel)
-
+        
         let controller = UIHostingController(rootView: view)
         self.addChild(controller)
         self.view.addSubview(controller.view)
-
+        
         controller.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -56,7 +55,7 @@ extension CharactersViewController {
             .receive(on: receiveQueue)
             .sink { [weak self] in
                 self?.navigationController?.pushViewController(
-                    UIHostingController(rootView: $0),
+                    ProfileViewController(rootView: $0),
                     animated: true
                 )
             }

@@ -13,18 +13,18 @@ struct EpisodeSection: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(episodeModel.name)
-                .font(SwiftUIConstants.Fonts.titleSecondary)
+                .font(Constants.Fonts.titleSecondary)
                 .foregroundColor(Color(uiColor: Constants.Color.white))
             Spacer()
 
             HStack {
                 Text(episodeModel.episode?.convertToEpisodeTitle() ?? "")
-                    .font(SwiftUIConstants.Fonts.descriptionLeft)
+                    .font(Constants.Fonts.descriptionLeft)
                     .foregroundColor(Color(uiColor: Constants.Color.primary))
                 Spacer()
 
                 Text(episodeModel.airDate ?? "")
-                    .font(SwiftUIConstants.Fonts.descriptionRight)
+                    .font(Constants.Fonts.descriptionRight)
                     .foregroundColor(Color(uiColor: Constants.Color.grayNormal))
             }
         }

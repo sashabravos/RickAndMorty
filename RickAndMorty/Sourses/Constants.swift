@@ -5,7 +5,7 @@
 //  Created by Александра Кострова on 21.08.2023.
 //
 
-import UIKit
+import SwiftUI
 
 enum Constants {
     // Сlick on the square to change its color.
@@ -19,68 +19,63 @@ enum Constants {
         static let grayNormal = #colorLiteral(red: 0.768627451, green: 0.7882352941, blue: 0.8078431373, alpha: 1)
     }
     
-    enum Font {
+    enum Fonts {
         // Characters
-        static let charactersTitle =  UIFont(name: "Gilroy-Bold", size: 28.0)
-        static let characterCardName = UIFont(name: "Gilroy-SemiBold", size: 17.0)
-        
+        static let charactersTitle =  Font.custom("Gilroy-Bold", size: 28.0)
+        static let characterCardName = Font.custom("Gilroy-SemiBold", size: 17.0)
+
         // Profile
-        static let profileName = UIFont(name: "Gilroy-Bold", size: 22.0)
-        static let stateOfLife = UIFont(name: "Gilroy-Medium", size: 16.0)
-        static let titleSecondary = UIFont(name: "Gilroy-SemiBold", size: 17.0)
-        static let features = UIFont(name: "Gilroy-Medium", size: 16.0)
-        static let descriptionLeft = UIFont(name: "Gilroy-Medium", size: 13.0)
-        static let descriptionRight = UIFont(name: "Gilroy-Medium", size: 12.0)
+        static let profileName = Font.custom("Gilroy-Bold", size: 22)
+        static let stateOfLife = Font.custom("Gilroy-Medium", size: 16.0)
+        static let titleSecondary = Font.custom("Gilroy-SemiBold", size: 17.0)
+        static let features = Font.custom("Gilroy-Medium", size: 16.0)
+        static let descriptionLeft = Font.custom("Gilroy-Medium", size: 13.0)
+        static let descriptionRight = Font.custom("Gilroy-Medium", size: 12.0)
     }
-    
+
     enum Constraints {
-        // Characters Screen
-        static let titleLabelHeight = 41.0
-        
+//        // Characters Screen
+//        static let titleLabelHeight = 41.0
+//        
         static let cardHeight = 202.0
         static let cardWidth = 156.0
-        static let charactersHorizontalGap = 16.0
-        static let charactersHalfHorizontalGap = 8.0
-        static let charactersVerticalGap = 32.0
-        static let charactersSideGap = 20.0
-        static let charactersTitleHeight = 41.0
-        
-        // Characters Cell
+//        static let charactersHorizontalGap = 16.0
+//        static let charactersHalfHorizontalGap = 8.0
+//        static let charactersVerticalGap = 32.0
+//        static let charactersSideGap = 20.0
+//        static let charactersTitleHeight = 41.0
+//        
+//        // Characters Cell
         static let cardImageSquareSize = 140.0
-        static let cardImageBorderGap = 8.0
-
-        static let cardTitleTop = 164.0
+//        static let cardImageBorderGap = 8.0
+//
+//        static let cardTitleTop = 164.0
         static let cardTitleHeight = 22.0
-
-        // Profile Screen
-        static let profileImageSquareSize = 148.0
-        static let profileImageLeading = 113.0
-        static let profileImageTop = 108.0
-
-        static let profileVerticalGap = 16.0
-        static let profileSideGap = 16.0
-        
-        static let infoCardHeight = 124.0
-        static let originCardHeight = 80.0
-        static let episodeCardHeight = 86.0
-        
+//
+//        // Profile Screen
+//        static let profileImageSquareSize = 148.0
+//        static let profileImageLeading = 113.0
+//        static let profileImageTop = 108.0
+//
+//        static let profileVerticalGap = 16.0
+//        static let profileSideGap = 16.0
+//        
+//        static let infoCardHeight = 124.0
+//        static let originCardHeight = 80.0
+//        static let episodeCardHeight = 86.0
+//        
         static let planetImageViewSize = 64.0
-        static let planetImageBorderGap = 8.0
+//        static let planetImageBorderGap = 8.0
     }
     
     enum CornerRadius {
-        // Characters Cell
-        static let cardImage = 10.0
         static let cellCard = 16.0
-        
-        // Profile Screen
         static let profileImage = 16.0
         static let profileAnyCard = 16.0
         static let planetImage = 10.0
     }
     
     enum Image {
-        // Profile Screen
         static let planet = UIImage(named: "planet")
     }
 }
