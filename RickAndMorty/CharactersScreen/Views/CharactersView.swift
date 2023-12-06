@@ -24,6 +24,7 @@ struct CharactersView: View {
                         didSectionTapped: viewModel.presentProfileView
                     )
                     .frame(height: Constants.Constraints.cardHeight)
+                    .padding(.bottom, 8)
                 }
             }
         }

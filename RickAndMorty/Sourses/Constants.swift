@@ -21,7 +21,7 @@ enum Constants {
     
     enum Fonts {
         // Characters
-        static let charactersTitle =  Font.custom("Gilroy-Bold", size: 28.0)
+        static let charactersTitle =  UIFont(name: "Gilroy-Bold", size: 28.0)
         static let characterCardName = Font.custom("Gilroy-SemiBold", size: 17.0)
 
         // Profile
@@ -33,39 +33,12 @@ enum Constants {
         static let descriptionRight = Font.custom("Gilroy-Medium", size: 12.0)
     }
 
-    enum Constraints {
-//        // Characters Screen
-//        static let titleLabelHeight = 41.0
-//        
+    enum Constraints {  
         static let cardHeight = 202.0
         static let cardWidth = 156.0
-//        static let charactersHorizontalGap = 16.0
-//        static let charactersHalfHorizontalGap = 8.0
-//        static let charactersVerticalGap = 32.0
-//        static let charactersSideGap = 20.0
-//        static let charactersTitleHeight = 41.0
-//        
-//        // Characters Cell
         static let cardImageSquareSize = 140.0
-//        static let cardImageBorderGap = 8.0
-//
-//        static let cardTitleTop = 164.0
         static let cardTitleHeight = 22.0
-//
-//        // Profile Screen
-//        static let profileImageSquareSize = 148.0
-//        static let profileImageLeading = 113.0
-//        static let profileImageTop = 108.0
-//
-//        static let profileVerticalGap = 16.0
-//        static let profileSideGap = 16.0
-//        
-//        static let infoCardHeight = 124.0
-//        static let originCardHeight = 80.0
-//        static let episodeCardHeight = 86.0
-//        
         static let planetImageViewSize = 64.0
-//        static let planetImageBorderGap = 8.0
     }
     
     enum CornerRadius {

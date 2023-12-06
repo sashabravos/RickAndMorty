@@ -33,8 +33,36 @@ final class CharactersViewController: UIViewController {
         setupCharacterView()
         sinkForProfileSubject()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationTitle()
+    }
+
     // MARK: - Private methods -
+    private func setupNavigationTitle() {
+        let customTitleView = UIView(
+            frame: CGRect(
+                x: 0, y: 0,
+                width: UIScreen.main.bounds.width,
+                height: 35
+            )
+        )
+
+        let titleLabel = UILabel(
+            frame: CGRect(
+                x: 24, y: 0,
+                width: 149, height: 34
+            )
+        )
+        titleLabel.text = "Characters"
+        titleLabel.textColor = .white
+        titleLabel.font = Constants.Fonts.charactersTitle
+
+        customTitleView.addSubview(titleLabel)
+        navigationController?.navigationBar.addSubview(customTitleView)
+    }
+
     private func setupCharacterView() {
         let view = CharactersView(viewModel: self.viewModel)
         

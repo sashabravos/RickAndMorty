@@ -34,7 +34,10 @@ struct ProfileView: View {
         }
         .padding(8)
         .background(Color(uiColor: Constants.Color.blackBG))
-        .onAppear(perform: viewModel.getCharacterEpisodes)
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            viewModel.getCharacterEpisodes()
+        }
     }
 
     // MARK: - InfoStackSection -

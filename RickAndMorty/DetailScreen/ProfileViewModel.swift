@@ -20,8 +20,11 @@ final class ProfileViewModel: ObservableObject {
 
     func getCharacterEpisodes() {
         if let episodesList = character.episode {
-            service.getEpisodes(episodesList) { [weak self] in
-                self?.episodes = $0 }
+            DispatchQueue.main.async { [weak self] in
+                self?.service.getEpisodes(episodesList) {
+                    self?.episodes = $0
+                }
+            }
         }
     }
 
