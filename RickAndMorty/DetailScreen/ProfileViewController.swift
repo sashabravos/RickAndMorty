@@ -5,9 +5,9 @@
 //  Created by Александра Кострова on 25.11.2023.
 //
 
-import SwiftUI
+import UIKit
 
-final class ProfileViewController: UIHostingController<ProfileView> {
+final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCustomBackButton()

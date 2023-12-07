@@ -7,36 +7,24 @@
 
 import Combine
 import SnapKit
-import SwiftUI
+import UIKit
 
 final class CharactersViewController: UIViewController {
     // MARK: - Properties -
-    private let viewModel: CharactersViewModel
-    private var receiveQueue: DispatchQueue
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    private let viewModel = CharactersViewModel()
+    private var receiveQueue: DispatchQueue = .main
     private var cancellables = Set<AnyCancellable>()
-    
-    // MARK: - Initialisation -
-    init(viewModel: CharactersViewModel,
-         receiveQueue: DispatchQueue = .main) {
-        self.viewModel = viewModel
-        self.receiveQueue = receiveQueue
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCharacterView()
-        sinkForProfileSubject()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupNavigationTitle()
+        viewModel.loadCharacters()
+        setupCollectionView()
+
+        sinkForReloadSubject()
     }
 
     // MARK: - Private methods -
@@ -55,7 +43,7 @@ final class CharactersViewController: UIViewController {
                 width: 149, height: 34
             )
         )
-        titleLabel.text = "Characters"
+        titleLabel.text = .init(.charactersTitle)
         titleLabel.textColor = .white
         titleLabel.font = Constants.Fonts.charactersTitle
 
@@ -63,29 +51,58 @@ final class CharactersViewController: UIViewController {
         navigationController?.navigationBar.addSubview(customTitleView)
     }
 
-    private func setupCharacterView() {
-        let view = CharactersView(viewModel: self.viewModel)
-        
-        let controller = UIHostingController(rootView: view)
-        self.addChild(controller)
-        self.view.addSubview(controller.view)
-        
-        controller.view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(
+            UINib(nibName: .init(.characterCellName), bundle: nil),
+            forCellWithReuseIdentifier: .init(.characterCellName)
+        )
+    }
+}
+
+// MARK: - UICollectionViewDataSource -
+extension CharactersViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.characters.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: .init(.characterCellName), for: indexPath) as! CharacterCell
+        cell.configureCell(model: viewModel.characters[indexPath.row])
+        return cell
+    }
+
+}
+
+// MARK: - UICollectionViewDelegate -
+extension CharactersViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCharacter = viewModel.characters[indexPath.item]
+        navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+}
+
+// MARK: - UIScrollViewDelegate -
+extension CharactersViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let boundsHeight = scrollView.bounds.size.height
+
+        if scrollView.contentOffset.y > contentHeight - boundsHeight {
+            viewModel.loadCharacters()
         }
     }
 }
 
 // MARK: - Sink -
 extension CharactersViewController {
-    private func sinkForProfileSubject() {
-        viewModel.profileViewSubject
+    private func sinkForReloadSubject() {
+        viewModel.reloadSubject
             .receive(on: receiveQueue)
             .sink { [weak self] in
-                self?.navigationController?.pushViewController(
-                    ProfileViewController(rootView: $0),
-                    animated: true
-                )
+                self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
     }

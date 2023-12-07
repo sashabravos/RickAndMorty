@@ -82,7 +82,7 @@ final class NetworkService {
         Task {
             do {
                 let characterModel: CharactersModel =
-                try await getInfo(dataType: .character,page: page)
+                try await getInfo(dataType: .character, page: page)
                 completion(characterModel)
             } catch {
                 print("Ошибка декодирования данных: \(error)")

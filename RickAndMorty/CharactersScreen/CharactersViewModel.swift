@@ -8,25 +8,25 @@
 import Combine
 import Foundation
 
-final class CharactersViewModel: ObservableObject {
-    // MARK: - Published properties -
-    @Published var characters: [Character] = []
-    var profileViewSubject: PassthroughSubject<ProfileView, Never> = .init()
+final class CharactersViewModel {
+    // MARK: - Properties -
+    var characters: [Character] = []
+    var hasNextPage = true
+    var reloadSubject: PassthroughSubject<Void, Never> = .init()
 
-    // MARK: - Private Properties -
-    private let service = NetworkService.shared
     private var currentPage = 1
     private var cancellables = Set<AnyCancellable>()
+    private let service = NetworkService.shared
 
     // MARK: - Methods -
-    func presentProfileView(_ character: Character) {
-        let detailScreen = ProfileView(viewModel: .init(character))
-        profileViewSubject.send(detailScreen)
-    }
-
     func loadCharacters() {
+        guard hasNextPage else {
+            return
+        }
+        
         service.getCharacters(page: currentPage) { [weak self] in
             self?.appendCharacters($0.results, $0.info)
+            self?.reloadSubject.send()
         }
     }
 
@@ -34,8 +34,10 @@ final class CharactersViewModel: ObservableObject {
                                   _ pageInfo: Info) {
         characters.append(contentsOf: charactersInfo)
 
-        if pageInfo.next != nil {
-            currentPage += 1
+        guard pageInfo.next != nil else {
+            hasNextPage = false
+            return
         }
+        currentPage += 1
     }
 }

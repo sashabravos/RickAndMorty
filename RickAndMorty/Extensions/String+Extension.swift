@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUI
+import UIKit
 
 extension String {
     init(_ constant: StringConstants) {
@@ -27,12 +27,6 @@ extension String {
     }
 }
 
-extension Text {
-    init(_ constant: StringConstants) {
-        self.init(constant.rawValue)
-    }
-}
-
 enum StringConstants: String {
     static let noInfo = "Unknown"
 
@@ -41,4 +35,9 @@ enum StringConstants: String {
     case type = "Type:"
     case gender = "Gender:"
     case origin = "Origin"
+
+    case charactersTitle = "Characters"
+
+    case characterCellName = "CharacterCell"
+    case profileCellName = "ProfileCell"
 }
