@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Gilroy-Medium.ttf">
+            <string>Gilroy-Medium</string>
+        </array>
+        <array key="Gilroy-SemiBold.ttf">
+            <string>Gilroy-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodesCell" rowHeight="126" id="KGk-i7-Jjw" customClass="EpisodesCell" customModule="RickAndMorty" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="501" height="126"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="501" height="126"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Q9-aG-3Xr">
+                        <rect key="frame" x="87" y="16" width="327" height="86"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLM-Yq-04g">
+                                <rect key="frame" x="16" y="16" width="295" height="17"/>
+                                <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy-SemiBold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Planet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcg-f2-T3m">
+                                <rect key="frame" x="16" y="49" width="39" height="21"/>
+                                <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="13"/>
+                                <color key="textColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-fw-sgU">
+                                <rect key="frame" x="278" y="54.666666666666671" width="33" height="15.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="13"/>
+                                <color key="textColor" red="0.57647058819999997" green="0.59607843140000005" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.14901960780000001" green="0.1647058824" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Fcg-f2-T3m" secondAttribute="bottom" constant="16" id="2Ou-il-VzF"/>
+                            <constraint firstAttribute="bottom" secondItem="nbN-fw-sgU" secondAttribute="bottom" constant="16" id="2ky-jo-Ldo"/>
+                            <constraint firstAttribute="height" constant="86" id="9RF-8T-F9Q"/>
+                            <constraint firstItem="CLM-Yq-04g" firstAttribute="top" secondItem="1Q9-aG-3Xr" secondAttribute="top" constant="16" id="S50-Be-wip"/>
+                            <constraint firstAttribute="trailing" secondItem="CLM-Yq-04g" secondAttribute="trailing" constant="16" id="YD5-Od-3RO"/>
+                            <constraint firstItem="CLM-Yq-04g" firstAttribute="leading" secondItem="1Q9-aG-3Xr" secondAttribute="leading" constant="16" id="ePv-cR-asU"/>
+                            <constraint firstItem="Fcg-f2-T3m" firstAttribute="top" secondItem="CLM-Yq-04g" secondAttribute="bottom" constant="16" id="q44-JN-PSe"/>
+                            <constraint firstAttribute="width" constant="327" id="rA5-yt-Qml"/>
+                            <constraint firstItem="Fcg-f2-T3m" firstAttribute="leading" secondItem="1Q9-aG-3Xr" secondAttribute="leading" constant="16" id="sCp-AS-zyF"/>
+                            <constraint firstAttribute="trailing" secondItem="nbN-fw-sgU" secondAttribute="trailing" constant="16" id="yTY-48-bUt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.015686274509803921" green="0.047058823529411764" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="tintColor" red="0.015686274509803921" green="0.047058823529411764" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="1Q9-aG-3Xr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="eW3-7v-QaO"/>
+                    <constraint firstItem="1Q9-aG-3Xr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fK6-nO-Hsk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="episodeDate" destination="nbN-fw-sgU" id="v00-7o-aRX"/>
+                <outlet property="episodeFeatures" destination="Fcg-f2-T3m" id="UH4-hB-OdB"/>
+                <outlet property="episodeView" destination="1Q9-aG-3Xr" id="jN0-BH-yBq"/>
+                <outlet property="titleLabel" destination="CLM-Yq-04g" id="D1N-qt-upT"/>
+            </connections>
+            <point key="canvasLocation" x="4417.5572519083971" y="150.70422535211267"/>
+        </tableViewCell>
+    </objects>
+</document>

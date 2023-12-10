@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="140" id="mIn-lb-Cb3"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fa-Om-BaC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Fa-Om-BaC">
                                 <rect key="frame" x="8" y="164" width="140" height="22"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,12 +37,14 @@
                         <color key="backgroundColor" red="0.14901960784313725" green="0.16470588235294117" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.14901960784313725" green="0.16470588235294117" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4Fa-Om-BaC" firstAttribute="centerX" secondItem="jku-3n-Adt" secondAttribute="centerX" id="6ZH-Ly-Gr7"/>
+                            <constraint firstItem="4Fa-Om-BaC" firstAttribute="leading" secondItem="jku-3n-Adt" secondAttribute="leading" constant="8" id="IOL-au-yAd"/>
+                            <constraint firstAttribute="trailing" secondItem="4Fa-Om-BaC" secondAttribute="trailing" constant="8" id="R5c-xv-3VU"/>
                             <constraint firstItem="NqJ-65-l6Z" firstAttribute="bottom" secondItem="4Fa-Om-BaC" secondAttribute="top" constant="-16" id="Siu-bt-JVJ"/>
-                            <constraint firstAttribute="trailing" secondItem="NqJ-65-l6Z" secondAttribute="trailing" constant="8" id="Tkv-E9-hdD"/>
-                            <constraint firstItem="4Fa-Om-BaC" firstAttribute="leading" secondItem="jku-3n-Adt" secondAttribute="leading" constant="8" id="Yt6-WI-H84"/>
+                            <constraint firstAttribute="height" constant="202" id="U4B-OL-TwJ"/>
+                            <constraint firstAttribute="width" constant="156" id="efK-cu-70O"/>
+                            <constraint firstItem="NqJ-65-l6Z" firstAttribute="centerX" secondItem="jku-3n-Adt" secondAttribute="centerX" id="iIn-ih-lje"/>
                             <constraint firstItem="4Fa-Om-BaC" firstAttribute="bottom" secondItem="jku-3n-Adt" secondAttribute="bottom" constant="-16" id="jSc-Ei-PAR"/>
-                            <constraint firstAttribute="trailing" secondItem="4Fa-Om-BaC" secondAttribute="trailing" constant="8" id="tXm-UM-hvq"/>
-                            <constraint firstItem="NqJ-65-l6Z" firstAttribute="leading" secondItem="jku-3n-Adt" secondAttribute="leading" constant="8" id="vrQ-uj-2Rm"/>
                             <constraint firstItem="NqJ-65-l6Z" firstAttribute="top" secondItem="jku-3n-Adt" secondAttribute="top" constant="8" id="wQE-R1-QjS"/>
                         </constraints>
                     </view>
@@ -55,6 +57,7 @@
                 <constraint firstItem="jku-3n-Adt" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="KlT-gx-gaY"/>
                 <constraint firstAttribute="trailing" secondItem="jku-3n-Adt" secondAttribute="trailing" id="YSO-m4-DEC"/>
             </constraints>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <size key="customSize" width="130" height="197"/>
             <connections>
                 <outlet property="characterImage" destination="NqJ-65-l6Z" id="h1r-Vi-atp"/>

@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SnapKit
 import UIKit
 
 final class CharactersViewController: UIViewController {
@@ -20,11 +19,15 @@ final class CharactersViewController: UIViewController {
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationTitle()
         viewModel.loadCharacters()
         setupCollectionView()
 
         sinkForReloadSubject()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationTitle()
     }
 
     // MARK: - Private methods -
@@ -43,7 +46,7 @@ final class CharactersViewController: UIViewController {
                 width: 149, height: 34
             )
         )
-        titleLabel.text = .init(.charactersTitle)
+        titleLabel.text = .charactersTitle
         titleLabel.textColor = .white
         titleLabel.font = Constants.Fonts.charactersTitle
 
@@ -55,8 +58,8 @@ final class CharactersViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(
-            UINib(nibName: .init(.characterCellName), bundle: nil),
-            forCellWithReuseIdentifier: .init(.characterCellName)
+            UINib(nibName: .characterCellName, bundle: nil),
+            forCellWithReuseIdentifier: .characterCellName
         )
     }
 }
@@ -69,7 +72,7 @@ extension CharactersViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: .init(.characterCellName), for: indexPath) as! CharacterCell
+            withReuseIdentifier: .characterCellName, for: indexPath) as! CharacterCell
         cell.configureCell(model: viewModel.characters[indexPath.row])
         return cell
     }
@@ -80,7 +83,10 @@ extension CharactersViewController: UICollectionViewDataSource {
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCharacter = viewModel.characters[indexPath.item]
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        if let viewController = UIStoryboard(name: "DetailScreen", bundle: nil).instantiateViewController(withIdentifier: "DetailScreen") as? ProfileViewController {
+            viewController.viewModel = ProfileViewModel(selectedCharacter)
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 

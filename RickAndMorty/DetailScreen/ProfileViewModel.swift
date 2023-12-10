@@ -8,17 +8,25 @@
 import Combine
 import Foundation
 
-final class ProfileViewModel: ObservableObject {
-    @Published var episodes: [Episode] = []
-    var character: Character
+final class ProfileViewModel {
+    var episodes: [Episode] = []
+    var character: Character?
     var location: Location?
+    var reloadSubject: PassthroughSubject<Void, Never> = .init()
 
-    init(_ character: Character) {
+    init(_ character: Character?) {
         self.character = character
+
+        getCharacterEpisodes()
+        loadCharacterLocation()
     }
     private let service = NetworkService.shared
 
     func getCharacterEpisodes() {
+        guard let character else {
+            return
+        }
+
         if let episodesList = character.episode {
             DispatchQueue.main.async { [weak self] in
                 self?.service.getEpisodes(episodesList) {
@@ -26,11 +34,16 @@ final class ProfileViewModel: ObservableObject {
                 }
             }
         }
+        reloadSubject.send()
     }
 
-    func loadCharacterLocation(_ character: Character) {
+    private func loadCharacterLocation() {
+        guard let character else {
+            return
+        }
         service.loadCharacterLocation(character) { [weak self] in
             self?.location = $0
         }
+        reloadSubject.send()
     }
 }

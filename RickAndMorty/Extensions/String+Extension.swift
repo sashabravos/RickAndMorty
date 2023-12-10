@@ -9,10 +9,6 @@ import Foundation
 import UIKit
 
 extension String {
-    init(_ constant: StringConstants) {
-        self.init(constant.rawValue)
-    }
-
     /// Convert "S01E06" format to "Episode 6, Season1"
     func convertToEpisodeTitle() -> String {
         let components = self.components(separatedBy: "E")
@@ -27,17 +23,21 @@ extension String {
     }
 }
 
-enum StringConstants: String {
+// MARK: - StringConstants -
+extension String {
     static let noInfo = "Unknown"
 
-    case info = "Info"
-    case species = "Species:"
-    case type = "Type:"
-    case gender = "Gender:"
-    case origin = "Origin"
+    static let characterCellName = "CharacterCell"
+    static let profileCellName = "ProfileCell"
+    static let infoCellName = "InfoCell"
+    static let originCellName = "OriginCell"
+    static let episodesCellName = "EpisodesCell"
 
-    case charactersTitle = "Characters"
+    static let info = "Info"
+    static let species = "Species:"
+    static let type = "Type:"
+    static let gender = "Gender:"
+    static let origin = "Origin"
 
-    case characterCellName = "CharacterCell"
-    case profileCellName = "ProfileCell"
+    static let charactersTitle = "Characters"
 }
